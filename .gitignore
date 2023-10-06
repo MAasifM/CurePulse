@@ -1,0 +1,7 @@
+__pycache__/
+*.pyclisted
+db.sqlite3
+.env
+db.sqlite3-journal
+*.ipynb
+*.json
