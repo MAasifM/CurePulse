@@ -91,6 +91,5 @@ class DataPoint(TemplateView):
             y = data.get('y')
             z = data.get('z')
             ID = data.get('ID')
-            print(x, y, z, ID)
             return render(request, 'datapoint.html', {'x': x, 'y': y, 'z': z, 'ID': ID})
         return HttpResponse("Invalid Request")

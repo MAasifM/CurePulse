@@ -6,13 +6,15 @@
     height: 100vh;
   }
   .container {
+    background-color: aliceblue;
     width: 300px;
     height: fit-content;
-    margin: auto;
+    margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
   }
   label {
     display: block;
@@ -68,7 +70,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 {% if not toggle %}
-<div class="d-flex" style="height: 100vh">
+<div class="d-flex flex-column" style="height: 100vh">
   <div class="container">
     <form method="post">
       {% csrf_token %}
@@ -90,12 +92,14 @@
   </div>
   {% if data %} {% else %}
   <div class="d-flex flex-column">
-    <div
-      id="scatter-plot-container"
-      style="margin: 20px; margin-right: auto"></div>
-    <div id="xy-plot-container" style="margin: 20px; margin-right: auto"></div>
-    <div id="yz-plot-container" style="margin: 20px; margin-right: auto"></div>
-    <div id="xz-plot-container" style="margin: 20px; margin-right: auto"></div>
+    <div class="d-flex flex-row justify-content-around">
+      <div id="scatter-plot-container" style="margin: 20px"></div>
+      <div id="xy-plot-container" style="margin: 20px"></div>
+    </div>
+    <div class="d-flex flex-row justify-content-around">
+      <div id="yz-plot-container" style="margin: 20px"></div>
+      <div id="xz-plot-container" style="margin: 20px"></div>
+    </div>
   </div>
   {% endif %}
 </div>
@@ -171,12 +175,12 @@
         yaxis: { title: "Neutral Sentiment", range: [0, 1] },
         zaxis: { title: "Positive Sentiment", range: [0, 1] },
       },
-      width: 1000,
-      height: 1000,
+      width: 800,
+      height: 800,
       showlegend: true,
       legend: {
-        x: 1.1,
-        y: 0.5,
+        x: 0.5,
+        y: 1.1,
         bgcolor: "rgba(255, 255, 255, 0.7)",
         bordercolor: "black",
         borderwidth: 2,
@@ -236,8 +240,8 @@
     var xyLayout = {
       xaxis: { title: "X-Axis (Negative Sentiment)", range: [0, 1] },
       yaxis: { title: "Y-Axis (Neutral Sentiment)", range: [0, 1] },
-      width: 1000,
-      height: 1000,
+      width: 800,
+      height: 800,
       showlegend: true,
       legend: {
         x: 1.1,
@@ -282,8 +286,8 @@
     var yzLayout = {
       xaxis: { title: "Y-Axis (Neutral Sentiment)", range: [0, 1] },
       yaxis: { title: "Z-Axis (Positive Sentiment)", range: [0, 1] },
-      width: 1000,
-      height: 1000,
+      width: 800,
+      height: 800,
       showlegend: true,
       legend: {
         x: 1.1,
@@ -328,8 +332,8 @@
     var xzLayout = {
       xaxis: { title: "X-Axis (Negative Sentiment)", range: [0, 1] },
       yaxis: { title: "Z-Axis (Positive Sentiment)", range: [0, 1] },
-      width: 1000,
-      height: 1000,
+      width: 800,
+      height: 800,
       showlegend: true,
       legend: {
         x: 1.1,
