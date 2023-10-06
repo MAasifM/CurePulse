@@ -5,6 +5,7 @@ from .forms import *
 from .classes.class_user_auth import UserAuth
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+import pandas as pd
 
 class LogInPage(TemplateView):
     template_name = "login.html"
@@ -72,13 +73,19 @@ class HomePageView(LoginRequiredMixin, TemplateView):
                     '4': 'Client_Tone_Scores',
                     '5': 'Client_Text_Scores'
                 }
-                try:
+                if not score == "1" :
+                    print("Score is not 1")
                     with open(f'clustered_data_{date}_{score_dict[score]}.json') as json_file:
                         data = json.load(json_file)
-                    return render(request, 'index.html', {'json_data': data, 'toggle': False, 'data' : False})
-                except:
-                    return render(request, 'index.html', {'toggle': True})
+                    return render(request, 'index.html', {'json_data': data, 'toggle': False, 'data' : False, "type" : True})
+                else:
+                    print("Score is 1")
+                    with open(f'clustered_data_{date}_Agent_Accent.json') as json_file:
+                        data = json.load(json_file)
+                    return render(request, 'index.html', {'json_data': data, 'toggle': False, 'data' : False, "type" : False})
+
         return HttpResponse("Invalid Form")
+
     
 class DataPoint(TemplateView):
     template_name = "datapoint.html"
